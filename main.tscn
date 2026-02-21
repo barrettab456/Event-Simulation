@@ -38,5 +38,3 @@ offset_right = 732.0
 offset_bottom = 524.0
 theme_override_font_sizes/font_size = 128
 text = "Coin Count:"
-
-[node name="coin_counter" type="Timer" parent="."]
