@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://bueaoq2xny5pj"]
+
+[ext_resource type="Script" uid="uid://dtsnjoyjmny53" path="res://main.gd" id="1_ig7tw"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_ig7tw")
+
+[node name="head_count" type="Label" parent="."]
+offset_left = 19.0
+offset_right = 886.0
+offset_bottom = 246.0
+theme_override_font_sizes/font_size = 126
+text = "Head Count: #"
+horizontal_alignment = 1
+
+[node name="table_count" type="Label" parent="."]
+offset_left = 11.0
+offset_top = 193.0
+offset_right = 905.0
+offset_bottom = 377.0
+theme_override_font_sizes/font_size = 126
+text = "Table Count: #"
+horizontal_alignment = 1
+
+[node name="instructions" type="Label" parent="."]
+offset_left = 23.0
+offset_top = 531.0
+offset_right = 785.0
+offset_bottom = 634.0
+theme_override_font_sizes/font_size = 36
+text = "add person - space bar
+add table - enter"
+
+[node name="coin_count" type="Label" parent="."]
+offset_left = 15.0
+offset_top = 349.0
+offset_right = 732.0
+offset_bottom = 524.0
+theme_override_font_sizes/font_size = 128
+text = "Coin Count:"
+
+[node name="coin_counter" type="Timer" parent="."]
