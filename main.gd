@@ -12,7 +12,7 @@ func _ready() -> void:
 	$table_count.modulate = Color.AQUAMARINE
 	
 	$coin_count.text = "Coin Count:" + str(coins)
-	$coin_count.modulate = Color.AQUAMARINE
+	$coin_count.modulate = Color.RED
 	
 	
 func _input(event):
@@ -39,3 +39,28 @@ func _input(event):
 			$coin_count.modulate = Color.RED
 			
 		
+
+
+func _on_add_person_pressed() -> void:
+	customers += 1
+	coins += 50
+	$coin_count.text = "Coin Count:" + str(coins)
+	if coins >= 100:
+		$coin_count.modulate = Color.AQUAMARINE
+		
+	if customers > table*4:
+		$head_count.modulate = Color.RED
+	$head_count.text = "Head count:" + str(customers)
+
+
+func _on_add_table_pressed() -> void:
+	if coins >= 100:
+		table += 1
+		$table_count.text = "Table count:" + str(table)
+		coins -= 100
+		$coin_count.text = "Coin Count:" + str(coins)
+		if customers < table*4:
+			$head_count.modulate = Color.AQUAMARINE
+
+	if coins < 100:
+		$coin_count.modulate = Color.RED

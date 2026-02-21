@@ -7,34 +7,47 @@ script = ExtResource("1_ig7tw")
 
 [node name="head_count" type="Label" parent="."]
 offset_left = 19.0
-offset_right = 886.0
+offset_right = 1153.0
 offset_bottom = 246.0
-theme_override_font_sizes/font_size = 126
+theme_override_font_sizes/font_size = 70
 text = "Head Count: #"
 horizontal_alignment = 1
 
 [node name="table_count" type="Label" parent="."]
 offset_left = 11.0
 offset_top = 193.0
-offset_right = 905.0
+offset_right = 1147.0
 offset_bottom = 377.0
-theme_override_font_sizes/font_size = 126
+theme_override_font_sizes/font_size = 70
 text = "Table Count: #"
 horizontal_alignment = 1
-
-[node name="instructions" type="Label" parent="."]
-offset_left = 23.0
-offset_top = 531.0
-offset_right = 785.0
-offset_bottom = 634.0
-theme_override_font_sizes/font_size = 36
-text = "add person - space bar
-add table - enter"
 
 [node name="coin_count" type="Label" parent="."]
 offset_left = 15.0
 offset_top = 349.0
-offset_right = 732.0
+offset_right = 1145.0
 offset_bottom = 524.0
-theme_override_font_sizes/font_size = 128
-text = "Coin Count:"
+theme_override_font_sizes/font_size = 70
+text = "Coin Count: #"
+horizontal_alignment = 1
+
+[node name="add_person" type="Button" parent="."]
+offset_left = 98.0
+offset_top = 511.0
+offset_right = 300.0
+offset_bottom = 568.0
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 35
+text = "Add Person"
+
+[node name="add_table" type="Button" parent="."]
+offset_left = 350.0
+offset_top = 511.0
+offset_right = 552.0
+offset_bottom = 568.0
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 35
+text = "Add Table"
+
+[connection signal="pressed" from="add_person" to="." method="_on_add_person_pressed"]
+[connection signal="pressed" from="add_table" to="." method="_on_add_table_pressed"]
