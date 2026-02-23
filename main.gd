@@ -6,6 +6,12 @@ func _ready() -> void:
 	$coin_count.text = "Coin Count:" + str(coins)
 	$coin_count.modulate = Color.RED
 	
+	$add_guest.text = "Guest amount:"
+	$add_guest.modulate = Color.AQUAMARINE
+	
+	$table_count.text = "Table count:"
+	$table_count.modulate = Color.AQUAMARINE
+	
 func _input(event):
 	if event.is_action_pressed("add_person"):
 		$guests.new_guest()

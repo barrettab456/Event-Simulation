@@ -2,9 +2,6 @@ extends Node
 var table = 0
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	$table_count.text = "Table count:"
-	$table_count.modulate = Color.AQUAMARINE
 
 func _input(event):	
 	if event.is_action_pressed("add_table"):
