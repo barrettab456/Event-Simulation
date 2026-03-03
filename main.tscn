@@ -1,8 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bueaoq2xny5pj"]
+[gd_scene load_steps=2 format=3 uid="uid://bueaoq2xny5pj"]
 
 [ext_resource type="Script" uid="uid://dtsnjoyjmny53" path="res://main.gd" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://cllvg4pj5qi5u" path="res://people.gd" id="2_0xm2m"]
-[ext_resource type="Script" uid="uid://c6cywb5pualny" path="res://tables.gd" id="3_h2yge"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_ig7tw")
@@ -34,10 +32,7 @@ theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 35
 text = "Add Table"
 
-[node name="guests" type="Node2D" parent="."]
-script = ExtResource("2_0xm2m")
-
-[node name="head_count" type="Label" parent="guests"]
+[node name="head_count" type="Label" parent="."]
 offset_left = 19.0
 offset_right = 1153.0
 offset_bottom = 246.0
@@ -45,10 +40,7 @@ theme_override_font_sizes/font_size = 70
 text = "Head Count: #"
 horizontal_alignment = 1
 
-[node name="tables" type="Node" parent="."]
-script = ExtResource("3_h2yge")
-
-[node name="table_count" type="Label" parent="tables"]
+[node name="table_count" type="Label" parent="."]
 offset_left = 11.0
 offset_top = 193.0
 offset_right = 1147.0
