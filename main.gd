@@ -3,6 +3,7 @@ extends Node
 var coins = 0
 var guests = 0
 var tables = 0 
+var enough_funds = false 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$coin_count.text = "Coin Count:" + str(coins)
@@ -22,21 +23,27 @@ func _input(event):
 	
 func new_guest():
 	guests += 1
-	coins += 50
+	coins += $guest.ticket_price
+	sufficient_funds()
 	update_hud()
 	
 func new_table():
-	if coins >= 100:
-			tables += 1
-			coins -= 100
+	if enough_funds == true:
+		tables += 1
+		coins -= 100
+	sufficient_funds()
 	update_hud()
-			
+
+func sufficient_funds():
+	if coins < 100:
+		$coin_count.modulate = Color.RED
+		enough_funds = false
+	else:
+		$coin_count.modulate = Color.AQUAMARINE
+		enough_funds = true
+		
 func update_hud():
 	$coin_count.text = "Coin Count:" + str(coins)
-	if coins < 100: 
-		$coin_count.modulate = Color.RED
-	else: 
-		$coin_count.modulate = Color.AQUAMARINE
 	$head_count.text = "Head count:" + str(guests)
 	$table_count.text = "Table count:" + str(tables)
 	if tables < guests*4: 
