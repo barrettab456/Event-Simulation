@@ -1,3 +1,5 @@
+#to get tables to go up (enter) 
+#to get guests up (space)
 extends Node
 
 var coins = 0
@@ -23,6 +25,7 @@ func _input(event):
 	
 func new_guest():
 	guests += 1
+	#guest_list.add($guest.new)
 	coins += $guest.ticket_price
 	sufficient_funds()
 	update_hud()
@@ -31,6 +34,7 @@ func new_table():
 	if enough_funds == true:
 		tables += 1
 		coins -= 100
+	#tables_with_seats.add(table())
 	sufficient_funds()
 	update_hud()
 
@@ -42,17 +46,12 @@ func sufficient_funds():
 		$coin_count.modulate = Color.AQUAMARINE
 		enough_funds = true
 		
+	
 func update_hud():
 	$coin_count.text = "Coin Count:" + str(coins)
 	$head_count.text = "Head count:" + str(guests)
 	$table_count.text = "Table count:" + str(tables)
-	if tables < guests*4: 
+	if tables * 4 < guests: 
 		$table_count.modulate = Color.RED
 	else: 
 		$table_count.modulate = Color.AQUAMARINE
-		
-func _on_add_person_pressed() -> void:
-	new_guest()
-	
-func _on_add_table_pressed() -> void:
-	new_table()

@@ -1,52 +1,36 @@
-[gd_scene load_steps=4 format=3 uid="uid://bueaoq2xny5pj"]
+[gd_scene load_steps=5 format=3 uid="uid://bueaoq2xny5pj"]
 
 [ext_resource type="Script" uid="uid://dtsnjoyjmny53" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://ggba6tammjjl" path="res://guest.gd" id="2_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://ctincokuqnkx1" path="res://icon.svg" id="3_1bvp3"]
 [ext_resource type="Script" uid="uid://ol5uqrrqnsqb" path="res://table.gd" id="3_h2yge"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_ig7tw")
 
 [node name="coin_count" type="Label" parent="."]
-offset_left = 15.0
-offset_top = 349.0
-offset_right = 1145.0
-offset_bottom = 524.0
+offset_left = -335.0
+offset_top = 202.0
+offset_right = 795.0
+offset_bottom = 377.0
 theme_override_font_sizes/font_size = 70
 text = "Coin Count: #"
 horizontal_alignment = 1
 
-[node name="add_guest" type="Button" parent="."]
-offset_left = 361.0
-offset_top = 499.0
-offset_right = 563.0
-offset_bottom = 556.0
-theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 35
-text = "Add Person"
-
-[node name="add_table" type="Button" parent="."]
-offset_left = 613.0
-offset_top = 499.0
-offset_right = 815.0
-offset_bottom = 556.0
-theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 35
-text = "Add Table"
-
 [node name="head_count" type="Label" parent="."]
-offset_left = 19.0
-offset_right = 1153.0
-offset_bottom = 246.0
+offset_left = -321.0
+offset_top = 12.0
+offset_right = 813.0
+offset_bottom = 258.0
 theme_override_font_sizes/font_size = 70
 text = "Head Count: #"
 horizontal_alignment = 1
 
 [node name="table_count" type="Label" parent="."]
-offset_left = 11.0
-offset_top = 193.0
-offset_right = 1147.0
-offset_bottom = 377.0
+offset_left = -322.0
+offset_top = 114.0
+offset_right = 814.0
+offset_bottom = 298.0
 theme_override_font_sizes/font_size = 70
 text = "Table Count: #"
 horizontal_alignment = 1
@@ -54,8 +38,10 @@ horizontal_alignment = 1
 [node name="guest" type="Node" parent="."]
 script = ExtResource("2_0xm2m")
 
+[node name="Sprite2D" type="Sprite2D" parent="guest"]
+position = Vector2(117, 385)
+scale = Vector2(0.59375, 0.59375)
+texture = ExtResource("3_1bvp3")
+
 [node name="table" type="Node" parent="."]
 script = ExtResource("3_h2yge")
-
-[connection signal="pressed" from="add_guest" to="." method="_on_add_person_pressed"]
-[connection signal="pressed" from="add_table" to="." method="_on_add_table_pressed"]

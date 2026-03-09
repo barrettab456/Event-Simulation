@@ -1,7 +1,11 @@
 extends Node
 
 var max_capacity = 4
-var capacity = 4
+var seated_guests = 0
+
+func has_space():
+	return seated_guests < max_capacity
 
 func sit_guest():
-	capacity -= 1
+	if has_space():
+		seated_guests+=1
