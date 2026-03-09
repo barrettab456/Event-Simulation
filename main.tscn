@@ -1,8 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bueaoq2xny5pj"]
+[gd_scene load_steps=3 format=3 uid="uid://bueaoq2xny5pj"]
 
 [ext_resource type="Script" uid="uid://dtsnjoyjmny53" path="res://main.gd" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://ggba6tammjjl" path="res://guest.gd" id="2_0xm2m"]
-[ext_resource type="Texture2D" uid="uid://ctincokuqnkx1" path="res://icon.svg" id="3_1bvp3"]
 [ext_resource type="Script" uid="uid://ol5uqrrqnsqb" path="res://table.gd" id="3_h2yge"]
 
 [node name="Main" type="Node"]
@@ -34,14 +32,6 @@ offset_bottom = 298.0
 theme_override_font_sizes/font_size = 70
 text = "Table Count: #"
 horizontal_alignment = 1
-
-[node name="guest" type="Node" parent="."]
-script = ExtResource("2_0xm2m")
-
-[node name="Sprite2D" type="Sprite2D" parent="guest"]
-position = Vector2(117, 385)
-scale = Vector2(0.59375, 0.59375)
-texture = ExtResource("3_1bvp3")
 
 [node name="table" type="Node" parent="."]
 script = ExtResource("3_h2yge")
