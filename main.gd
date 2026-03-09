@@ -7,6 +7,7 @@ var guests = 0
 var tables = 0 
 var enough_funds = false 
 var guest_list = []
+var table_list = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$coin_count.text = "Coin Count:" + str(coins)
@@ -25,7 +26,7 @@ func _input(event):
 		new_table()
 	
 func new_guest():
-	var guest = preload("res://guest.tscn").instantiate()
+	var guest = preload("res://Guest.tscn").instantiate()
 	add_child(guest)
 	guest_list.append(guest)
 	
@@ -36,9 +37,14 @@ func new_guest():
 	update_hud()
 	
 func new_table():
-	if enough_funds == true:
+	if enough_funds:
+		var table = preload("res://Table.tscn").instantiate()
+		add_child(table)
+		table_list.append(table)
+		
 		tables += 1
 		coins -= 100
+		
 	sufficient_funds()
 	update_hud()
 
