@@ -6,8 +6,9 @@ var coins = 0
 var guests = 0
 var tables = 0 
 var enough_funds = false 
-var guest_list = []
+var unseated_guest_list = []
 var table_list = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$coin_count.text = "Coin Count:" + str(coins)
@@ -28,11 +29,12 @@ func _input(event):
 func new_guest():
 	var guest = preload("res://Guest.tscn").instantiate()
 	add_child(guest)
-	guest_list.append(guest)
+	unseated_guest_list.append(guest)
 	
 	guests += 1
 	coins += guest.ticket_price
 	
+	seat_guest_at_table(guest)
 	sufficient_funds()
 	update_hud()
 	
@@ -45,6 +47,9 @@ func new_table():
 		tables += 1
 		coins -= 100
 		
+	for guest in unseated_guest_list:
+		seat_guest_at_table(guest)
+		
 	sufficient_funds()
 	update_hud()
 
@@ -55,6 +60,15 @@ func sufficient_funds():
 	else:
 		$coin_count.modulate = Color.AQUAMARINE
 		enough_funds = true
+		
+func seat_guest_at_table(guest):
+	for t in table_list:
+		if t.has_space():
+			t.sit_guest()
+			guest.is_seated = true
+			unseated_guest_list.erase(guest)
+		else:
+			guest.is_seated = false 
 		
 	
 func update_hud():
