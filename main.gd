@@ -34,6 +34,8 @@ func new_guest():
 	guests += 1
 	coins += guest.ticket_price
 	
+	#$UI/guest_circls.add_child(guest.circle)
+	
 	seat_guest_at_table(guest)
 	sufficient_funds()
 	update_hud()

@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcdh18lcrrl1s"]
+[gd_scene load_steps=3 format=3 uid="uid://bcdh18lcrrl1s"]
 
-[ext_resource type="Script" uid="uid://ggba6tammjjl" path="res://guest.gd" id="1_phlap"]
+[ext_resource type="Script" uid="uid://ggba6tammjjl" path="res://guest.gd" id="1_286r3"]
+[ext_resource type="Texture2D" uid="uid://bvrnfjkcmpr8s" path="res://addons/gut/images/green.png" id="2_flo8d"]
 
 [node name="guest" type="Node2D"]
-script = ExtResource("1_phlap")
+script = ExtResource("1_286r3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="circle" type="TextureRect" parent="."]
+offset_left = 112.0
+offset_top = 193.0
+offset_right = 239.0
+offset_bottom = 320.0
+texture = ExtResource("2_flo8d")
