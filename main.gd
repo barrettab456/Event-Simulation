@@ -49,9 +49,10 @@ func new_table():
 		
 		tables += 1
 		coins -= 100
-		
-	for guest in unseated_guest_list:
+	
+	for guest in unseated_guest_list.duplicate():
 		seat_guest_at_table(guest)
+
 		
 	sufficient_funds()
 	update_hud()
@@ -71,8 +72,7 @@ func seat_guest_at_table(guest):
 			guest.is_seated = true
 			if guest in unseated_guest_list:
 				unseated_guest_list.erase(guest)
-			return
-		
+			return		
 	
 func update_hud():
 	$coin_count.text = "Coin Count:" + str(coins)
