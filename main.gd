@@ -45,6 +45,15 @@ func new_table():
 	if enough_funds:
 		var table = preload("res://Table.tscn").instantiate()
 		add_child(table)
+		
+		var cols = 4
+		var spacing_x = 250
+		var spacing_y = 250
+		var index = tables  
+		var row = index / cols
+		var col = index % cols
+		table.position = Vector2(col * spacing_x, row * spacing_y)
+
 		table_list.append(table)
 		
 		tables += 1
