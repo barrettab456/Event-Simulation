@@ -30,11 +30,12 @@ func new_guest():
 	var guest = preload("res://Guest.tscn").instantiate()
 	add_child(guest)
 	unseated_guest_list.append(guest)
-	
+	guest.position = Vector2(50 * unseated_guest_list.size(), 400)
+
 	guests += 1
 	coins += guest.ticket_price
 	
-	#$UI/guest_circls.add_child(guest.circle)
+	#$UI/guest_circles.add_child(guest.circle)
 	
 	seat_guest_at_table(guest)
 	sufficient_funds()
@@ -66,11 +67,11 @@ func sufficient_funds():
 func seat_guest_at_table(guest):
 	for t in table_list:
 		if t.has_space():
-			t.sit_guest()
+			t.sit_guest(guest)
 			guest.is_seated = true
-			unseated_guest_list.erase(guest)
-		else:
-			guest.is_seated = false 
+			if guest in unseated_guest_list:
+				unseated_guest_list.erase(guest)
+			return
 		
 	
 func update_hud():
