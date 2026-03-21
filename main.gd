@@ -30,6 +30,7 @@ func new_guest():
 	var guest = preload("res://Guest.tscn").instantiate()
 	add_child(guest)
 	unseated_guest_list.append(guest)
+	guest.update_color()
 	guest.position = Vector2(50 * unseated_guest_list.size(), 400)
 
 	guests += 1
@@ -79,6 +80,7 @@ func seat_guest_at_table(guest):
 		if t.has_space():
 			t.sit_guest(guest)
 			guest.is_seated = true
+			guest.update_color()
 			if guest in unseated_guest_list:
 				unseated_guest_list.erase(guest)
 			return		
