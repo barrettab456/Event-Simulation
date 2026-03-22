@@ -29,13 +29,18 @@ func new_guest():
 
 	guests += 1
 	coins += guest.ticket_price
+	winner()
 	
 	#$UI/guest_circles.add_child(guest.circle)
 	
 	seat_guest_at_table(guest)
 	sufficient_funds()
 	update_hud()
-	
+
+func winner():
+	if coins >= 1000:
+		$winner.visible = true
+		
 func new_table():
 	if enough_funds and tables < 8 :
 		var table = preload("res://Table.tscn").instantiate()
@@ -98,5 +103,6 @@ func update_hud():
 	$coin_count.text = "Coin Count:" + str(coins)
 
 
+#GET ADD TABLE BUTTON TO WORK
 func _on_add_table_pressed():
 	new_table()
