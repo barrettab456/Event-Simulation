@@ -14,12 +14,6 @@ func _ready() -> void:
 	$coin_count.text = "Coin Count:" + str(coins)
 	$coin_count.modulate = Color.RED
 	
-	$head_count.text = "Head amount:"
-	$head_count.modulate = Color.AQUAMARINE
-	
-	$table_count.text = "Table count:"
-	$table_count.modulate = Color.AQUAMARINE
-	
 func _input(event):
 	if event.is_action_pressed("add_person"):
 		new_guest()
@@ -43,7 +37,7 @@ func new_guest():
 	update_hud()
 	
 func new_table():
-	if enough_funds:
+	if enough_funds and tables < 8 :
 		var table = preload("res://Table.tscn").instantiate()
 		add_child(table)
 		
@@ -59,13 +53,28 @@ func new_table():
 		
 		tables += 1
 		coins -= 100
-	
+	elif tables == 8:
+		display_no_space()
+	elif not enough_funds:
+		display_no_funds()
+		
 	for guest in unseated_guest_list.duplicate():
 		seat_guest_at_table(guest)
 
 		
 	sufficient_funds()
 	update_hud()
+
+func display_no_space():
+		$no_space.visible = true
+		await get_tree().create_timer(1.0).timeout
+		$no_space.visible = false
+
+func display_no_funds():
+		$no_funds.visible = true
+		await get_tree().create_timer(1.0).timeout
+		$no_funds.visible = false
+	
 
 func sufficient_funds():
 	if coins < 100:
@@ -87,9 +96,7 @@ func seat_guest_at_table(guest):
 	
 func update_hud():
 	$coin_count.text = "Coin Count:" + str(coins)
-	$head_count.text = "Head count:" + str(guests)
-	$table_count.text = "Table count:" + str(tables)
-	if tables * 4 < guests: 
-		$table_count.modulate = Color.RED
-	else: 
-		$table_count.modulate = Color.AQUAMARINE
+
+
+func _on_add_table_pressed():
+	new_table()

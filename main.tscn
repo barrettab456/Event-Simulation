@@ -6,28 +6,61 @@
 script = ExtResource("1_ig7tw")
 
 [node name="coin_count" type="Label" parent="."]
-offset_left = -335.0
-offset_top = 202.0
-offset_right = 795.0
-offset_bottom = 377.0
+offset_left = -320.0
+offset_top = 547.0
+offset_right = 810.0
+offset_bottom = 722.0
 theme_override_font_sizes/font_size = 70
 text = "Coin Count: #"
 horizontal_alignment = 1
 
-[node name="head_count" type="Label" parent="."]
-offset_left = -321.0
-offset_top = 12.0
-offset_right = 813.0
-offset_bottom = 258.0
-theme_override_font_sizes/font_size = 70
-text = "Head Count: #"
-horizontal_alignment = 1
+[node name="no_space" type="CanvasLayer" parent="."]
+visible = false
 
-[node name="table_count" type="Label" parent="."]
-offset_left = -322.0
-offset_top = 114.0
-offset_right = 814.0
-offset_bottom = 298.0
-theme_override_font_sizes/font_size = 70
-text = "Table Count: #"
-horizontal_alignment = 1
+[node name="Label" type="Label" parent="no_space"]
+offset_left = 366.0
+offset_top = 265.0
+offset_right = 750.0
+offset_bottom = 335.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 51
+text = "No more space!"
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="no_space"]
+z_index = -1
+offset_left = 326.0
+offset_top = 234.0
+offset_right = 789.0
+offset_bottom = 375.0
+
+[node name="no_funds" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Label" type="Label" parent="no_funds"]
+offset_left = 366.0
+offset_top = 265.0
+offset_right = 750.0
+offset_bottom = 335.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 51
+text = "Not enough funds!"
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="no_funds"]
+z_index = -1
+offset_left = 326.0
+offset_top = 234.0
+offset_right = 877.0
+offset_bottom = 375.0
+
+[node name="add_table" type="Button" parent="."]
+offset_left = 860.0
+offset_top = 513.0
+offset_right = 1116.0
+offset_bottom = 621.0
+theme_override_font_sizes/font_size = 26
+text = "ADD TABLE
+$100 per table"
+
+[connection signal="pressed" from="add_table" to="." method="_on_add_table_pressed"]

@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://bith74fr0x4t"]
+
+[ext_resource type="Script" uid="uid://cdlj3ms1wp17u" path="res://button.gd" id="1_hp420"]
+
+[node name="welcome" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_right = 1151.0
+offset_bottom = 643.0
+color = Color(0.5176471, 0.5647059, 1, 1)
+
+[node name="welcome_to_event" type="Label" parent="."]
+offset_left = 73.0
+offset_top = 144.0
+offset_right = 1108.0
+offset_bottom = 269.0
+theme_override_font_sizes/font_size = 91
+text = "Welcome to the event!!!"
+horizontal_alignment = 1
+
+[node name="info" type="Label" parent="."]
+offset_left = 459.0
+offset_top = 273.0
+offset_right = 741.0
+offset_bottom = 426.0
+theme_override_font_sizes/font_size = 26
+text = "Max capacity: 32
+Ticket Cost: $50
+Time: 6:00pm - 8:00pm
+Goal: Collect $1,000
+"
+horizontal_alignment = 1
+
+[node name="close_button" type="Button" parent="."]
+offset_left = 363.0
+offset_top = 496.0
+offset_right = 820.0
+offset_bottom = 574.0
+theme_override_font_sizes/font_size = 51
+text = "Click here to start!"
+script = ExtResource("1_hp420")
+
+[connection signal="pressed" from="close_button" to="close_button" method="_on_close_button_pressed"]
