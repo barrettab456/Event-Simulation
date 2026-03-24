@@ -4,13 +4,19 @@ extends Node
 
 var coins = 0
 var guests = 0
+
+## ! this variable seems redundant, can't you just check tht length of the tables list?
 var tables = 0 
+
+## ! see sufficient_funds functions: this variable is a scary to me in terms of stale state, what if it doesn't get updated at the right time? I would say delete this call the functin where necessary
 var enough_funds = false 
+
 var unseated_guest_list = []
 var table_list = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	## ! Agreed that the stuff below belongs in it's own HUD script and scene
 	$coin_count.text = "Coin Count:" + str(coins)
 	$coin_count.modulate = Color.RED
 	
@@ -29,11 +35,16 @@ func new_guest():
 
 	guests += 1
 	coins += guest.ticket_price
+	
+	## ! functions should generally be phrased as actions, maybe check_if_winner, display_if_winner? Also, this should be part of HUD
 	winner()
 	
 	#$UI/guest_circles.add_child(guest.circle)
 	
+	## ! this name is great, direct clear action
 	seat_guest_at_table(guest)
+	
+	## ! this one again should indicate what is being done
 	sufficient_funds()
 	update_hud()
 
@@ -70,6 +81,7 @@ func new_table():
 	sufficient_funds()
 	update_hud()
 
+## ! both of these seem like HUD
 func display_no_space():
 		$no_space.visible = true
 		await get_tree().create_timer(1.0).timeout
@@ -81,6 +93,9 @@ func display_no_funds():
 		$no_funds.visible = false
 	
 
+## ! this should be like check_for_table_funds or something, should just return true/false
+## ! there should be a HUD function that sets color
+## ! Where this is called should be an if statement that calls this and then calls appropriate HUD function
 func sufficient_funds():
 	if coins < 100:
 		$coin_count.modulate = Color.RED
@@ -92,9 +107,14 @@ func sufficient_funds():
 func seat_guest_at_table(guest):
 	for t in table_list:
 		if t.has_space():
+			## ! sit_guest might not seat someone, it has an if statement (especially when game gets complicated)
 			t.sit_guest(guest)
+			
+			## ! can't this part be in Table.sit_guest so it only happens if they are seated?
 			guest.is_seated = true
 			guest.update_color()
+			
+			## ! Why this if statement? Shouldn't you know whether they are in the guest_list or not?
 			if guest in unseated_guest_list:
 				unseated_guest_list.erase(guest)
 			return		
