@@ -1,11 +1,13 @@
 #to get tables to go up (enter) 
 #to get guests up (space)
 #WHAT GOES HERE VS HUD?
+#MAKE FLOW OF HOW GUESTS MOVE BETTER
 
 extends Node
 
 var coins = 0
 var guests = 0
+var time_left = 120
 
 var unseated_guest_list = []
 var table_list = []
@@ -25,21 +27,16 @@ func new_guest():
 	var guest = preload("res://Guest.tscn").instantiate()
 	add_child(guest)
 	unseated_guest_list.append(guest)
+	update_spawn_rate()
 	guest.update_color()
 	guest.position = Vector2(50 * unseated_guest_list.size(), 400)
 
 	guests += 1
 	coins += guest.ticket_price
-	check_if_winner()
 	
 	seat_guest_at_table(guest)
 	check_sufficient_funds()
 	update_hud()
-
-func check_if_winner():
-	if coins >= 1000:
-		$winner.visible = true
-#MAKE A NEW GAME BUTTON
 		
 func new_table():
 	print("new_table")
@@ -94,10 +91,12 @@ func seat_guest_at_table(guest):
 	for t in table_list:
 		if t.has_space():
 			t.sit_guest(guest)
+			guest.current_table = t
 			guest.is_seated = true
 			guest.update_color()
 			if guest in unseated_guest_list:
 				unseated_guest_list.erase(guest)
+				update_spawn_rate()
 			return		
 	
 func update_hud():
@@ -108,3 +107,27 @@ func update_hud():
 func _on_add_table_pressed():
 	print("on add")
 	new_table()
+
+
+func _on_guest_timer_timeout() -> void:
+	new_guest()
+	
+
+func update_spawn_rate():
+	var next_wait_time = unseated_guest_list.size()*2
+	$guest_timer.wait_time = next_wait_time
+	print(next_wait_time)
+
+
+func _on_timer_timeout() -> void:
+	time_left -= 1
+	$Timer/time_timer.text = "Time left in event: " + str(time_left)
+	if time_left == 0:
+		game_over()
+
+func game_over():
+	if coins >= 1000:
+		$winner.visible = true
+	else:
+		$loser.visible = true
+#MAKE A NEW GAME BUTTON

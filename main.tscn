@@ -88,4 +88,43 @@ offset_right = 1111.0
 offset_bottom = 580.0
 color = Color(0.8653553, 0.8375844, 1.5019991, 1)
 
+[node name="guest_timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="time_timer" type="Label" parent="Timer"]
+offset_left = 27.0
+offset_top = 507.0
+offset_right = 477.0
+offset_bottom = 564.0
+theme_override_font_sizes/font_size = 41
+text = "Time left on event: 120"
+
+[node name="loser" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Label" type="Label" parent="loser"]
+offset_left = 118.0
+offset_top = 220.0
+offset_right = 1076.0
+offset_bottom = 363.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 51
+text = "Your event failed :("
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="loser"]
+z_index = -1
+offset_left = 80.0
+offset_top = 35.0
+offset_right = 1111.0
+offset_bottom = 580.0
+color = Color(0.8653553, 0.8375844, 1.5019991, 1)
+
 [connection signal="pressed" from="add_table" to="." method="_on_add_table_pressed"]
+[connection signal="timeout" from="guest_timer" to="." method="_on_guest_timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
