@@ -1,12 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgn4j0axtxyba"]
+[gd_scene load_steps=3 format=3 uid="uid://cgn4j0axtxyba"]
 
 [ext_resource type="Script" uid="uid://ol5uqrrqnsqb" path="res://table.gd" id="1_2sdc1"]
+[ext_resource type="Texture2D" uid="uid://cm6kpcyfnjpcl" path="res://table.png" id="2_muxx0"]
 
 [node name="table" type="Node2D"]
 script = ExtResource("1_2sdc1")
 
-[node name="square" type="ColorRect" parent="."]
-offset_left = -4.0
-offset_top = 104.0
-offset_right = 181.0
-offset_bottom = 186.0
+[node name="Table" type="Sprite2D" parent="."]
+position = Vector2(72, 124)
+scale = Vector2(0.7170067, 0.7544248)
+texture = ExtResource("2_muxx0")

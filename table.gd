@@ -15,13 +15,13 @@ func sit_guest(guest):
 		var seat_pos := Vector2.ZERO
 
 		if seated_guests == 1:
-			seat_pos = Vector2(-4, 5)
+			seat_pos = Vector2(-7, 10)
 		elif seated_guests == 2:
-			seat_pos = Vector2(94, 5)
+			seat_pos = Vector2(70,10)
 		elif seated_guests == 3:
-			seat_pos = Vector2(-4, 190)
+			seat_pos = Vector2(-7, 75)
 		elif seated_guests == 4:
-			seat_pos = Vector2(94, 190)
+			seat_pos = Vector2(70, 75)
 			
 		guest.is_seated = true
 		guest.update_color()

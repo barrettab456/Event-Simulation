@@ -1,12 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://bcdh18lcrrl1s"]
 
 [ext_resource type="Script" uid="uid://ggba6tammjjl" path="res://guest.gd" id="1_286r3"]
-[ext_resource type="Texture2D" uid="uid://dx0yxxn5q7doc" path="res://addons/gut/images/eyey.png" id="2_286r3"]
+[ext_resource type="Texture2D" uid="uid://r4cencu8qpoq" path="res://out.png" id="2_286r3"]
 
 [node name="guest" type="Node2D"]
 script = ExtResource("1_286r3")
 
 [node name="circle_not_seated" type="Sprite2D" parent="."]
-position = Vector2(45, 49.5)
-scale = Vector2(0.5492958, 0.5140845)
+z_index = 4
+z_as_relative = false
+position = Vector2(38.5, 42.061447)
+scale = Vector2(5.75, 6.1769075)
 texture = ExtResource("2_286r3")
+region_enabled = true
+region_rect = Rect2(0, 0, 12.86274, 12.05284)

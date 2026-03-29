@@ -60,7 +60,7 @@ func new_table():
 		coins -= 100
 	elif table_list.size() == 8:
 		display_no_space()
-	elif check_sufficient_funds():
+	elif check_sufficient_funds() == false:
 		display_no_funds()
 		
 	for guest in unseated_guest_list.duplicate():
