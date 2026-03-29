@@ -22,5 +22,8 @@ func sit_guest(guest):
 			seat_pos = Vector2(-4, 190)
 		elif seated_guests == 4:
 			seat_pos = Vector2(94, 190)
+			
+		guest.is_seated = true
+		guest.update_color()
 
 		guest.global_position = global_position + seat_pos
