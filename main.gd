@@ -1,6 +1,6 @@
 #to get tables to go up (enter) 
 #to get guests up (space)
-#WHAT GOES HERE VS HUD?
+
 #MAKE FLOW OF HOW GUESTS MOVE BETTER
 
 extends Node
@@ -13,8 +13,8 @@ var unseated_guest_list = []
 var table_list = []
 
 func _ready() -> void:
-	$coin_count.text = "Coin Count:" + str(coins)
-	$coin_count.modulate = Color.RED
+	$Hud.get_ready(coins)
+	print("hi")
 	
 func _input(event):
 	if event.is_action_pressed("add_person"):
@@ -35,12 +35,11 @@ func new_guest():
 	coins += guest.ticket_price
 	
 	seat_guest_at_table(guest)
-	check_sufficient_funds()
-	update_hud()
+	$Hud.check_sufficient_funds(coins)
+	$Hud.update_coins_hud(coins)
 		
 func new_table():
-	print("new_table")
-	if check_sufficient_funds() and table_list.size() < 8 :
+	if $Hud.check_sufficient_funds(coins) and table_list.size() < 8 :
 		var table = preload("res://Table.tscn").instantiate()
 		add_child(table)
 		
@@ -55,52 +54,28 @@ func new_table():
 		table_list.append(table)
 		
 		coins -= 100
-	elif table_list.size() == 8:
-		display_no_space()
-	elif check_sufficient_funds() == false:
-		display_no_funds()
+		
+		$Hud.check_table_errors(table_list, coins)
 		
 	for guest in unseated_guest_list.duplicate():
 		seat_guest_at_table(guest)
 
-		
-	check_sufficient_funds()
-	update_hud()
-
-func display_no_space():
-		$no_space.visible = true
-		await get_tree().create_timer(1.0).timeout
-		$no_space.visible = false
-
-func display_no_funds():
-		$no_funds.visible = true
-		await get_tree().create_timer(1.0).timeout
-		$no_funds.visible = false
+	$Hud.check_sufficient_funds(coins)
+	$Hud.update_coins_hud(coins)
 	
-
-func check_sufficient_funds():
-	if coins < 100:
-		$coin_count.modulate = Color.RED
-		return false
-	else:
-		$coin_count.modulate = Color.AQUAMARINE
-		return true
-		
-		
 func seat_guest_at_table(guest):
 	for t in table_list:
 		if t.has_space():
 			t.sit_guest(guest)
 			guest.current_table = t
 			guest.is_seated = true
+
+			$guest/guest_leave_timer.start()
 			guest.update_color()
 			if guest in unseated_guest_list:
 				unseated_guest_list.erase(guest)
 				update_spawn_rate()
 			return		
-	
-func update_hud():
-	$coin_count.text = "Coin Count:" + str(coins)
 
 
 #GET ADD TABLE BUTTON TO WORK
@@ -108,16 +83,13 @@ func _on_add_table_pressed():
 	print("on add")
 	new_table()
 
-
 func _on_guest_timer_timeout() -> void:
 	new_guest()
-	
 
 func update_spawn_rate():
 	var next_wait_time = unseated_guest_list.size()*2
 	$guest_timer.wait_time = next_wait_time
 	print(next_wait_time)
-
 
 func _on_timer_timeout() -> void:
 	time_left -= 1

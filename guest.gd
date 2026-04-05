@@ -11,9 +11,7 @@ func update_color():
 	else:
 		circle_not_seated.modulate = Color(1,0,0)
 		
-
-	
-
-	
-
-	
+func _on_guest_leave_timer_timeout() -> void:
+	if current_table:
+		current_table.remove_guest(self)
+	queue_free()
