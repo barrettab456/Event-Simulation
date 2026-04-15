@@ -1,8 +1,5 @@
 #to get tables to go up (enter) 
 #to get guests up (space)
-
-#MAKE FLOW OF HOW GUESTS MOVE BETTER
-
 extends Node
 
 var coins = 0
@@ -34,12 +31,16 @@ func new_guest():
 	guests += 1
 	coins += guest.ticket_price
 	
-	seat_guest_at_table(guest)
+	guest.name_guest(guests)
 	$Hud.check_sufficient_funds(coins)
 	$Hud.update_coins_hud(coins)
-		
+	
+	
+	#seat_guest_at_table(guest)
+
+
 func new_table():
-	if $Hud.check_sufficient_funds(coins) and table_list.size() < 8 :
+	if $Hud.check_table_errors(table_list, coins):
 		var table = preload("res://Table.tscn").instantiate()
 		add_child(table)
 		
@@ -47,15 +48,14 @@ func new_table():
 		var spacing_x = 250
 		var spacing_y = 250
 		var index = table_list.size()
-		var row = index / cols
+		@warning_ignore("integer_division")
+		var row = int(index / cols)
 		var col = index % cols
 		table.position = Vector2(col * spacing_x, row * spacing_y)
 
 		table_list.append(table)
 		
 		coins -= 100
-		
-		$Hud.check_table_errors(table_list, coins)
 		
 	for guest in unseated_guest_list.duplicate():
 		seat_guest_at_table(guest)
@@ -65,17 +65,13 @@ func new_table():
 	
 func seat_guest_at_table(guest):
 	for t in table_list:
-		if t.has_space():
-			t.sit_guest(guest)
-			guest.current_table = t
-			guest.is_seated = true
-
-			$guest/guest_leave_timer.start()
-			guest.update_color()
-			if guest in unseated_guest_list:
-				unseated_guest_list.erase(guest)
-				update_spawn_rate()
-			return		
+		t.sit_guest(guest)
+		guest.current_table = t
+		guest.guest_timer.start()
+		if guest in unseated_guest_list:
+			unseated_guest_list.erase(guest)
+			update_spawn_rate()
+		return		
 
 
 #GET ADD TABLE BUTTON TO WORK
@@ -83,23 +79,21 @@ func _on_add_table_pressed():
 	print("on add")
 	new_table()
 
-func _on_guest_timer_timeout() -> void:
+func _on_guest_timer_timeout():
 	new_guest()
 
 func update_spawn_rate():
 	var next_wait_time = unseated_guest_list.size()*2
-	$guest_timer.wait_time = next_wait_time
-	print(next_wait_time)
+	$Hud/guest_timer.wait_time = next_wait_time
 
 func _on_timer_timeout() -> void:
 	time_left -= 1
-	$Timer/time_timer.text = "Time left in event: " + str(time_left)
+	$Hud/Timer/time_timer.text = "Time left in event: " + str(time_left)
 	if time_left == 0:
 		game_over()
-
+		
 func game_over():
 	if coins >= 1000:
-		$winner.visible = true
+		$Hud/winner.visible = true
 	else:
-		$loser.visible = true
-#MAKE A NEW GAME BUTTON
+		$Hud/loser.visible = true

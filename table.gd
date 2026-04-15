@@ -1,37 +1,32 @@
 extends Node2D
 
 var max_capacity = 4
-var seated_guests = 0
-var sat_guest_list = []
+const seat_loc:Array[Vector2] = [
+	Vector2(-7, 10),
+	Vector2(70, 10),
+	Vector2(-7, 75),
+	Vector2(70, 75)
+]
 
-func has_space():
-	return seated_guests < max_capacity
+var chairs:Array = [null, null, null, null]
 
 func sit_guest(guest):
-	if has_space():
-		seated_guests += 1
-		sat_guest_list.append(guest)
-		
-		var seat_pos := Vector2.ZERO
-
-		if seated_guests == 1:
-			seat_pos = Vector2(-7, 10)
-		elif seated_guests == 2:
-			seat_pos = Vector2(70,10)
-		elif seated_guests == 3:
-			seat_pos = Vector2(-7, 75)
-		elif seated_guests == 4:
-			seat_pos = Vector2(70, 75)
-			
-		guest.is_seated = true
-		guest.update_color()
-		guest.current_table = self
-		guest.global_position = global_position + seat_pos
-		
-func remove_guest(guest):
-	if guest in sat_guest_list:
-			sat_guest_list.erase(guest)
-			seated_guests -= 1
-			guest.is_seated = false
-			guest.current_table = null
+	for i in range(chairs.size()):
+		if chairs[i] == null:
+			chairs[i] = guest
+			guest.is_seated = true
+			guest.current_table = self
 			guest.update_color()
+
+			var target_pos = global_position + seat_loc[i]
+			guest.walk_to(target_pos)
+
+			return
+
+func remove_guest(guest):
+	var index := chairs.find(guest)
+	if index != -1:
+		chairs[index] = null
+		guest.is_seated = false
+		guest.current_table = null
+		guest.update_color()

@@ -1,23 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://bueaoq2xny5pj"]
+[gd_scene load_steps=3 format=3 uid="uid://bueaoq2xny5pj"]
 
-[ext_resource type="Script" uid="uid://ckt0r7epx8sfy" path="res://hud.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://dtsnjoyjmny53" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bjgxdvn4an3j0" path="res://HUD.tscn" id="2_h2yge"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0xm2m")
 
-[node name="coin_count" type="Label" parent="."]
-offset_left = -320.0
-offset_top = 547.0
-offset_right = 810.0
-offset_bottom = 722.0
-theme_override_font_sizes/font_size = 70
-text = "Coin Count: #"
-horizontal_alignment = 1
+[node name="Hud" parent="." instance=ExtResource("2_h2yge")]
+position = Vector2(63, 373)
 
-[node name="no_space" type="CanvasLayer" parent="."]
+[node name="no_space" type="CanvasLayer" parent="Hud"]
 visible = false
 
-[node name="Label" type="Label" parent="no_space"]
+[node name="Label" type="Label" parent="Hud/no_space"]
 offset_left = 366.0
 offset_top = 265.0
 offset_right = 750.0
@@ -27,7 +22,7 @@ theme_override_font_sizes/font_size = 51
 text = "No more space!"
 metadata/_edit_use_anchors_ = true
 
-[node name="ColorRect" type="ColorRect" parent="no_space"]
+[node name="ColorRect" type="ColorRect" parent="Hud/no_space"]
 z_index = -1
 offset_left = 326.0
 offset_top = 234.0
@@ -35,41 +30,20 @@ offset_right = 789.0
 offset_bottom = 375.0
 color = Color(0.8653553, 0.8375844, 1.5019991, 1)
 
-[node name="no_funds" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="Label" type="Label" parent="no_funds"]
-offset_left = 366.0
-offset_top = 265.0
-offset_right = 750.0
-offset_bottom = 335.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 51
-text = "Not enough funds!"
-metadata/_edit_use_anchors_ = true
-
-[node name="ColorRect" type="ColorRect" parent="no_funds"]
-z_index = -1
-offset_left = 326.0
-offset_top = 234.0
-offset_right = 877.0
-offset_bottom = 375.0
-color = Color(0.8653553, 0.8375844, 1.5019991, 1)
-
-[node name="add_table" type="Button" parent="."]
-offset_left = 860.0
-offset_top = 513.0
-offset_right = 1116.0
-offset_bottom = 621.0
+[node name="add_table" type="Button" parent="Hud"]
+offset_left = 797.0
+offset_top = 140.0
+offset_right = 1053.0
+offset_bottom = 248.0
 focus_mode = 0
 theme_override_font_sizes/font_size = 26
 text = "ADD TABLE
 $100 per table"
 
-[node name="winner" type="CanvasLayer" parent="."]
+[node name="winner" type="CanvasLayer" parent="Hud"]
 visible = false
 
-[node name="Label" type="Label" parent="winner"]
+[node name="Label" type="Label" parent="Hud/winner"]
 offset_left = 118.0
 offset_top = 220.0
 offset_right = 1076.0
@@ -81,7 +55,7 @@ text = "Congrats you threw
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="ColorRect" type="ColorRect" parent="winner"]
+[node name="ColorRect" type="ColorRect" parent="Hud/winner"]
 z_index = -1
 offset_left = 80.0
 offset_top = 35.0
@@ -89,14 +63,14 @@ offset_right = 1111.0
 offset_bottom = 580.0
 color = Color(0.8653553, 0.8375844, 1.5019991, 1)
 
-[node name="guest_timer" type="Timer" parent="."]
-wait_time = 2.0
+[node name="guest_timer" type="Timer" parent="Hud"]
+wait_time = 4.0
 autostart = true
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="Hud"]
 autostart = true
 
-[node name="time_timer" type="Label" parent="Timer"]
+[node name="time_timer" type="Label" parent="Hud/Timer"]
 offset_left = 27.0
 offset_top = 507.0
 offset_right = 477.0
@@ -104,10 +78,10 @@ offset_bottom = 564.0
 theme_override_font_sizes/font_size = 41
 text = "Time left on event: 120"
 
-[node name="loser" type="CanvasLayer" parent="."]
+[node name="loser" type="CanvasLayer" parent="Hud"]
 visible = false
 
-[node name="Label" type="Label" parent="loser"]
+[node name="Label" type="Label" parent="Hud/loser"]
 offset_left = 118.0
 offset_top = 220.0
 offset_right = 1076.0
@@ -118,7 +92,7 @@ text = "Your event failed :("
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="ColorRect" type="ColorRect" parent="loser"]
+[node name="ColorRect" type="ColorRect" parent="Hud/loser"]
 z_index = -1
 offset_left = 80.0
 offset_top = 35.0
@@ -126,6 +100,36 @@ offset_right = 1111.0
 offset_bottom = 580.0
 color = Color(0.8653553, 0.8375844, 1.5019991, 1)
 
-[connection signal="pressed" from="add_table" to="." method="_on_add_table_pressed"]
-[connection signal="timeout" from="guest_timer" to="." method="_on_guest_timer_timeout"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="coin_count" type="Label" parent="Hud"]
+offset_left = -383.0
+offset_top = 174.0
+offset_right = 747.0
+offset_bottom = 349.0
+theme_override_font_sizes/font_size = 70
+text = "Coin Count: #"
+horizontal_alignment = 1
+
+[node name="no_funds" type="CanvasLayer" parent="Hud"]
+visible = false
+
+[node name="Label" type="Label" parent="Hud/no_funds"]
+offset_left = 366.0
+offset_top = 265.0
+offset_right = 750.0
+offset_bottom = 335.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 51
+text = "Not enough funds!"
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Hud/no_funds"]
+z_index = -1
+offset_left = 326.0
+offset_top = 234.0
+offset_right = 877.0
+offset_bottom = 375.0
+color = Color(0.8653553, 0.8375844, 1.5019991, 1)
+
+[connection signal="pressed" from="Hud/add_table" to="." method="_on_add_table_pressed"]
+[connection signal="timeout" from="Hud/guest_timer" to="." method="_on_guest_timer_timeout"]
+[connection signal="timeout" from="Hud/Timer" to="." method="_on_timer_timeout"]

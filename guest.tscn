@@ -9,14 +9,23 @@ script = ExtResource("1_286r3")
 [node name="circle_not_seated" type="Sprite2D" parent="."]
 z_index = 4
 z_as_relative = false
-position = Vector2(38.5, 42.061447)
+position = Vector2(38.5, 73.06145)
 scale = Vector2(5.75, 6.1769075)
 texture = ExtResource("2_286r3")
 region_enabled = true
 region_rect = Rect2(0, 0, 12.86274, 12.05284)
 
 [node name="guest_leave_timer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 8.059
 one_shot = true
+
+[node name="guest_name" type="Label" parent="."]
+anchors_preset = -1
+anchor_right = 0.049000002
+offset_left = 10.0
+offset_top = 13.0
+offset_right = 76.0
+offset_bottom = 36.0
+text = "#. Name"
 
 [connection signal="timeout" from="guest_leave_timer" to="." method="_on_guest_leave_timer_timeout"]
