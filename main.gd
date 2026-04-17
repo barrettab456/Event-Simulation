@@ -57,6 +57,7 @@ func new_table():
 		
 		coins -= 100
 		
+	# do you know why there is that duplicate here? Might not be the best solution...
 	for guest in unseated_guest_list.duplicate():
 		seat_guest_at_table(guest)
 
@@ -65,12 +66,16 @@ func new_table():
 	
 func seat_guest_at_table(guest):
 	for t in table_list:
+		# right here, this next line might seat a guest if the table is empty, or might not if the table is full,
+		# and you have no way of knowing wether it did or not, right?
 		t.sit_guest(guest)
 		guest.current_table = t
 		guest.guest_timer.start()
 		if guest in unseated_guest_list:
 			unseated_guest_list.erase(guest)
 			update_spawn_rate()
+		# doesn't his return mean that this for loop will only ever happen  once? 
+		# so they either sit at the first table or not at all?
 		return		
 
 
