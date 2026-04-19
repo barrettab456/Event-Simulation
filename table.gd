@@ -1,24 +1,24 @@
 extends Node2D
 
 var max_capacity = 4
-const seat_loc:Array[Vector2] = [
+const seat_loc_array = [
 	Vector2(-7, 10),
 	Vector2(70, 10),
 	Vector2(-7, 75),
 	Vector2(70, 75)
 ]
 
-var chairs:Array = [null, null, null, null]
+var chairs = [null, null, null, null]
 
 func sit_guest(guest):
 	for i in range(chairs.size()):
 		if chairs[i] == null:
 			chairs[i] = guest
-			guest.is_seated = true
-			guest.current_table = self
-			guest.update_color()
+			chairs[i].is_seated = true
+			chairs[i].current_table = self
+			chairs[i].update_color()
 
-			var target_pos = global_position + seat_loc[i]
+			var target_pos = global_position + seat_loc_array[i]
 			guest.walk_to(target_pos)
 
 			return

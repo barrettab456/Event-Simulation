@@ -11,7 +11,6 @@ var table_list = []
 
 func _ready() -> void:
 	$Hud.get_ready(coins)
-	print("hi")
 	
 func _input(event):
 	if event.is_action_pressed("add_person"):
@@ -20,7 +19,6 @@ func _input(event):
 		new_table()
 	
 func new_guest():
-#PUT ON TIMER
 	var guest = preload("res://Guest.tscn").instantiate()
 	add_child(guest)
 	unseated_guest_list.append(guest)
@@ -36,7 +34,7 @@ func new_guest():
 	$Hud.update_coins_hud(coins)
 	
 	
-	#seat_guest_at_table(guest)
+	seat_guest_at_table(guest)
 
 
 func new_table():
@@ -84,7 +82,8 @@ func _on_guest_timer_timeout():
 
 func update_spawn_rate():
 	var next_wait_time = unseated_guest_list.size()*2
-	$Hud/guest_timer.wait_time = next_wait_time
+	if next_wait_time > 0:
+		$Hud/guest_timer.wait_time = next_wait_time
 
 func _on_timer_timeout() -> void:
 	time_left -= 1
