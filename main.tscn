@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bueaoq2xny5pj"]
+[gd_scene load_steps=5 format=3 uid="uid://bueaoq2xny5pj"]
 
 [ext_resource type="Script" uid="uid://dtsnjoyjmny53" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://bjgxdvn4an3j0" path="res://HUD.tscn" id="2_h2yge"]
+[ext_resource type="AudioStream" uid="uid://mycyw8kelsh3" path="res://8bit Bossa.mp3" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://cney1owu87y3" path="res://background_music.gd" id="4_1bvp3"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0xm2m")
@@ -44,14 +46,16 @@ $100 per table"
 visible = false
 
 [node name="Label" type="Label" parent="Hud/winner"]
-offset_left = 118.0
-offset_top = 220.0
-offset_right = 1076.0
-offset_bottom = 363.0
+anchors_preset = -1
+anchor_right = 0.5095486
+offset_left = -178.0
+offset_top = 222.0
+offset_right = 780.0
+offset_bottom = 365.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 51
-text = "Congrats you threw
- a sucessful event!"
+text = "Thank you for playing! 
+Contact abarrett3@ithaca.edu for more!"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
@@ -129,6 +133,12 @@ offset_top = 234.0
 offset_right = 877.0
 offset_bottom = 375.0
 color = Color(0.8653553, 0.8375844, 1.5019991, 1)
+
+[node name="background_music" type="AudioStreamPlayer" parent="Hud"]
+stream = ExtResource("3_h2yge")
+volume_db = -18.602
+autoplay = true
+script = ExtResource("4_1bvp3")
 
 [connection signal="pressed" from="Hud/add_table" to="." method="_on_add_table_pressed"]
 [connection signal="timeout" from="Hud/guest_timer" to="." method="_on_guest_timer_timeout"]

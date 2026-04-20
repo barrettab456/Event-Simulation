@@ -35,4 +35,8 @@ func check_sufficient_funds(coins):
 		$coin_count.modulate = Color.AQUAMARINE
 		return true
 		
+func display_time(time_left):
+	$Timer/time_timer.text = "Time left in event: " + str(time_left)
+	
+		
 		

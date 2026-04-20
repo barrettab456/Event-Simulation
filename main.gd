@@ -12,6 +12,7 @@ var table_list = []
 func _ready() -> void:
 	$Hud.get_ready(coins)
 	
+	
 func _input(event):
 	if event.is_action_pressed("add_person"):
 		new_guest()
@@ -34,7 +35,7 @@ func new_guest():
 	$Hud.update_coins_hud(coins)
 	
 	
-	seat_guest_at_table(guest)
+	seat_guest_at_table()
 
 
 func new_table():
@@ -56,20 +57,21 @@ func new_table():
 		coins -= 100
 		
 	for guest in unseated_guest_list.duplicate():
-		seat_guest_at_table(guest)
+		seat_guest_at_table()
 
 	$Hud.check_sufficient_funds(coins)
 	$Hud.update_coins_hud(coins)
 	
-func seat_guest_at_table(guest):
-	for t in table_list:
-		if t.sit_guest(guest):
-			guest.current_table = t
-			guest.guest_timer.start()
-			if guest in unseated_guest_list:
-				unseated_guest_list.erase(guest)
+func seat_guest_at_table():
+	var iteration_list = unseated_guest_list.duplicate()
+	for i in range (iteration_list.size()):
+		for t in table_list:
+			if t.sit_guest(iteration_list[i]):
+				iteration_list[i].current_table = t
+				unseated_guest_list.erase(iteration_list[i])
+				
 				update_spawn_rate()
-			return		
+
 
 
 #GET ADD TABLE BUTTON TO WORK
@@ -87,11 +89,12 @@ func update_spawn_rate():
 
 func _on_timer_timeout() -> void:
 	time_left -= 1
-	$Hud/Timer/time_timer.text = "Time left in event: " + str(time_left)
+	$Hud.display_time(time_left)
 	if time_left == 0:
 		game_over()
-		
+
 func game_over():
+	$Hud/background_music.end_music()
 	if coins >= 1000:
 		$Hud/winner.visible = true
 	else:

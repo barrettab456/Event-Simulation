@@ -20,6 +20,7 @@ func sit_guest(guest):
 
 			var target_pos = global_position + seat_loc_array[i]
 			guest.walk_to(target_pos)
+			guest.guest_timer.start()
 
 			return true
 	return false
