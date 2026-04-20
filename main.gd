@@ -63,13 +63,13 @@ func new_table():
 	
 func seat_guest_at_table(guest):
 	for t in table_list:
-		t.sit_guest(guest)
-		guest.current_table = t
-		guest.guest_timer.start()
-		if guest in unseated_guest_list:
-			unseated_guest_list.erase(guest)
-			update_spawn_rate()
-		return		
+		if t.sit_guest(guest):
+			guest.current_table = t
+			guest.guest_timer.start()
+			if guest in unseated_guest_list:
+				unseated_guest_list.erase(guest)
+				update_spawn_rate()
+			return		
 
 
 #GET ADD TABLE BUTTON TO WORK

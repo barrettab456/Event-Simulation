@@ -21,7 +21,8 @@ func sit_guest(guest):
 			var target_pos = global_position + seat_loc_array[i]
 			guest.walk_to(target_pos)
 
-			return
+			return true
+	return false
 
 func remove_guest(guest):
 	var index := chairs.find(guest)
