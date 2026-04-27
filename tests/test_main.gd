@@ -27,9 +27,8 @@ func test_new_table():
 
 func test_seat_guest_at_table():	
 	var table1 = main.new_table()
-	
 	var guest = main.new_guest()
 	
-	main.seat_guest_at_table(guest)
-	
+	main.seat_guest_at_table()
+
 	assert_eq(guest.current_table, table1, "gust at table")

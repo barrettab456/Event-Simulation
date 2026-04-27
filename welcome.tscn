@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bith74fr0x4t"]
+[gd_scene load_steps=5 format=3 uid="uid://bith74fr0x4t"]
 
+[ext_resource type="FontFile" uid="uid://r4lrnx0je13m" path="res://Godot-Fontpack-d244bf6170b399a6d4d26a0d906058ddf2dafdf1/Godot-Fontpack-d244bf6170b399a6d4d26a0d906058ddf2dafdf1/fonts/kirifont/KiriFont.ttf" id="1_f0t8f"]
 [ext_resource type="Script" uid="uid://cdlj3ms1wp17u" path="res://button.gd" id="1_hp420"]
+[ext_resource type="FontFile" uid="uid://c65g0jx7rxdtd" path="res://Godot-Fontpack-d244bf6170b399a6d4d26a0d906058ddf2dafdf1/Godot-Fontpack-d244bf6170b399a6d4d26a0d906058ddf2dafdf1/fonts/architect-s-daughter/ArchitectsDaughter.ttf" id="2_roe5y"]
+[ext_resource type="FontFile" uid="uid://br1i50nfjqmqs" path="res://Godot-Fontpack-d244bf6170b399a6d4d26a0d906058ddf2dafdf1/Godot-Fontpack-d244bf6170b399a6d4d26a0d906058ddf2dafdf1/fonts/kirifont/KiriFont.otf" id="3_yo83p"]
 
 [node name="welcome" type="Node2D"]
 
@@ -13,19 +16,23 @@ offset_bottom = 643.0
 color = Color(0.5176471, 0.5647059, 1, 1)
 
 [node name="welcome_to_event" type="Label" parent="."]
-offset_left = 73.0
-offset_top = 144.0
-offset_right = 1108.0
-offset_bottom = 269.0
-theme_override_font_sizes/font_size = 91
-text = "Welcome to the event!!!"
+offset_left = 5.0
+offset_top = 146.0
+offset_right = 1150.0
+offset_bottom = 271.0
+theme_override_fonts/font = ExtResource("1_f0t8f")
+theme_override_font_sizes/font_size = 68
+text = "Welcome to The Event!!!"
 horizontal_alignment = 1
 
 [node name="info" type="Label" parent="."]
-offset_left = 459.0
-offset_top = 273.0
-offset_right = 741.0
-offset_bottom = 426.0
+offset_left = 404.0
+offset_top = 264.0
+offset_right = 786.0
+offset_bottom = 526.0
+theme_override_constants/line_spacing = 13
+theme_override_constants/paragraph_spacing = -5
+theme_override_fonts/font = ExtResource("2_roe5y")
 theme_override_font_sizes/font_size = 26
 text = "Max capacity: 32
 Ticket Cost: $50
@@ -35,10 +42,11 @@ Goal: Collect $1,000
 horizontal_alignment = 1
 
 [node name="close_button" type="Button" parent="."]
-offset_left = 363.0
-offset_top = 496.0
-offset_right = 820.0
-offset_bottom = 574.0
+offset_left = 243.0
+offset_top = 503.0
+offset_right = 949.0
+offset_bottom = 581.0
+theme_override_fonts/font = ExtResource("3_yo83p")
 theme_override_font_sizes/font_size = 51
 text = "Click here to start!"
 script = ExtResource("1_hp420")

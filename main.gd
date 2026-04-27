@@ -2,16 +2,17 @@
 #to get guests up (space)
 extends Node
 
-var coins = 0
+var coins = 200
 var guests = 0
 var time_left = 120
+var guest_scene = preload("res://Guest.tscn")
 
 var unseated_guest_list = []
 var table_list = []
 
 func _ready() -> void:
 	$Hud.get_ready(coins)
-	
+	new_table()
 	
 func _input(event):
 	if event.is_action_pressed("add_person"):
@@ -20,22 +21,24 @@ func _input(event):
 		new_table()
 	
 func new_guest():
-	var guest = preload("res://Guest.tscn").instantiate()
+	var guest = guest_scene.instantiate()
 	add_child(guest)
+	guest.left_table.connect(seat_guest_at_table)
+	
 	unseated_guest_list.append(guest)
-	update_spawn_rate()
 	guest.update_color()
+	guest.name_guest(guests)
 	guest.position = Vector2(50 * unseated_guest_list.size(), 400)
 
 	guests += 1
-	coins += guest.ticket_price
+	update_spawn_rate()
+	seat_guest_at_table()
 	
-	guest.name_guest(guests)
+func pay_entry_fee(guest):
+	coins += guest.ticket_price
 	$Hud.check_sufficient_funds(coins)
 	$Hud.update_coins_hud(coins)
-	
-	
-	seat_guest_at_table()
+
 
 
 func new_table():
@@ -54,7 +57,8 @@ func new_table():
 
 		table_list.append(table)
 		
-		coins -= 100
+		coins -= 180
+		$cash.play()
 		
 	for guest in unseated_guest_list.duplicate():
 		seat_guest_at_table()
@@ -69,7 +73,7 @@ func seat_guest_at_table():
 			if t.sit_guest(iteration_list[i]):
 				iteration_list[i].current_table = t
 				unseated_guest_list.erase(iteration_list[i])
-				
+				pay_entry_fee(iteration_list[i])
 				update_spawn_rate()
 
 
@@ -83,7 +87,7 @@ func _on_guest_timer_timeout():
 	new_guest()
 
 func update_spawn_rate():
-	var next_wait_time = unseated_guest_list.size()*2
+	var next_wait_time = max(0.5, unseated_guest_list.size() * 1.5)
 	if next_wait_time > 0:
 		$Hud/guest_timer.wait_time = next_wait_time
 
@@ -99,3 +103,12 @@ func game_over():
 		$Hud/winner.visible = true
 	else:
 		$Hud/loser.visible = true
+	get_tree().paused = true
+	$Hud/playAgain.visible = true
+
+
+func _on_play_again_pressed() -> void:
+	get_tree().paused = false
+	get_tree().reload_current_scene()
+	
+	
