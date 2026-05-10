@@ -21,6 +21,11 @@ func display_no_space():
 	$no_space.visible = true
 	await get_tree().create_timer(1.0).timeout
 	$no_space.visible = false
+	
+func update_add_table_button():
+		$add_table.disabled = true
+		$add_table/table_cooldown.start()
+		$add_table/new_table_block.visible = true
 
 func display_no_funds():
 		$no_funds.visible = true
@@ -28,7 +33,7 @@ func display_no_funds():
 		$no_funds.visible = false
 		
 func check_sufficient_funds(coins):
-	if coins < 180:
+	if coins < 200:
 		$coin_count.modulate = Color.MAROON
 		return false
 	else:

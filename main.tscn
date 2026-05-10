@@ -46,6 +46,27 @@ theme_override_font_sizes/font_size = 26
 text = "ADD TABLE
 $180 per table"
 
+[node name="table_cooldown" type="Timer" parent="Hud/add_table"]
+
+[node name="new_table_block" type="ColorRect" parent="Hud/add_table"]
+visible = false
+layout_mode = 0
+offset_right = 254.0
+offset_bottom = 108.0
+
+[node name="gathering_table" type="Label" parent="Hud/add_table/new_table_block"]
+layout_mode = 0
+offset_right = 254.0
+offset_bottom = 109.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -5
+theme_override_fonts/font = ExtResource("3_272bh")
+theme_override_font_sizes/font_size = 20
+text = "Gathering more tables...
+ 13 MORE SECONDS!"
+horizontal_alignment = 1
+autowrap_mode = 3
+
 [node name="winner" type="CanvasLayer" parent="Hud"]
 visible = false
 
@@ -178,6 +199,7 @@ color = Color(0.47957563, 0.4132339, 0.31211743, 1)
 stream = ExtResource("7_5vw27")
 
 [connection signal="pressed" from="Hud/add_table" to="." method="_on_add_table_pressed"]
+[connection signal="timeout" from="Hud/add_table/table_cooldown" to="." method="_on_table_cooldown_timeout"]
 [connection signal="timeout" from="Hud/guest_timer" to="." method="_on_guest_timer_timeout"]
 [connection signal="timeout" from="Hud/Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Hud/playAgain/play_again" to="." method="_on_play_again_pressed"]
