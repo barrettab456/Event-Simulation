@@ -7,7 +7,7 @@ var satisfaction = 1
 var is_seated = false 
 var ticket_price = 40
 var current_table = null
-var guest_leave_count = 15
+var guest_leave_count = 20
 var has_left = false
 
 @onready var guest_leave_timer = $guest_leave_timer
@@ -30,7 +30,6 @@ func name_guest(num_guests):
 		
 func _on_guest_leave_timer_timeout():
 	guest_leave_count -= 1
-	print(guest_leave_count)
 	if guest_leave_count <= 0:
 		has_left = true
 		if is_instance_valid(current_table):

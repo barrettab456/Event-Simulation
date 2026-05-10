@@ -22,15 +22,18 @@ func _input(event):
 func new_guest():
 	var guest = guest_scene.instantiate()
 	add_child(guest)
+	guest.position = Vector2(1143, 398)
 	guest.left_table.connect(seat_guest_at_table)
 	guest.left_line.connect(on_guest_left_line)
 	unseated_guest_list.append(guest)
 	guest.update_color()
 	guest.name_guest(guests)
-	guest.position = Vector2(50 * unseated_guest_list.size(), 400)
-
+	
 	guests += 1
 	seat_guest_at_table()
+	
+	if not guest.is_seated:
+		update_line_positions()
 	
 func pay_entry_fee(guest):
 	coins += guest.ticket_price
@@ -69,6 +72,7 @@ func seat_guest_at_table():
 		for t in table_list:
 			if t.sit_guest(iteration_list[i]):
 				iteration_list[i].current_table = t
+				#update_line_positions()
 				unseated_guest_list.erase(iteration_list[i])
 				pay_entry_fee(iteration_list[i])
 
@@ -110,3 +114,12 @@ func _on_table_cooldown_timeout() -> void:
 		
 func on_guest_left_line(guest):
 	unseated_guest_list.erase(guest)
+	update_line_positions()
+
+func update_line_positions():
+	var start_pos = Vector2(50, 400)
+	var spacing = 50
+	for i in range(unseated_guest_list.size()):
+		var guest = unseated_guest_list[i]
+		var target = start_pos + Vector2(i * spacing, 0)
+		guest.walk_to(target)
