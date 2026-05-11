@@ -19,13 +19,14 @@ region_rect = Rect2(0, 0, 12.86274, 12.05284)
 autostart = true
 
 [node name="guest_name" type="Label" parent="."]
-visible = false
 anchors_preset = -1
 anchor_right = 0.049000002
-offset_left = 10.0
-offset_top = 13.0
-offset_right = 76.0
-offset_bottom = 36.0
+offset_left = 6.0
+offset_top = -6.0
+offset_right = 72.0
+offset_bottom = 17.0
 text = "#. Name"
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [connection signal="timeout" from="guest_leave_timer" to="." method="_on_guest_leave_timer_timeout"]

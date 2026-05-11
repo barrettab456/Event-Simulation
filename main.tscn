@@ -44,7 +44,7 @@ focus_mode = 0
 theme_override_fonts/font = ExtResource("3_272bh")
 theme_override_font_sizes/font_size = 26
 text = "ADD TABLE
-$300 per table"
+$500 per table"
 
 [node name="table_cooldown" type="Timer" parent="Hud/add_table"]
 
@@ -67,10 +67,10 @@ text = "Gathering more tables...
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="winner" type="CanvasLayer" parent="Hud"]
+[node name="end_game" type="CanvasLayer" parent="Hud"]
 visible = false
 
-[node name="Label" type="Label" parent="Hud/winner"]
+[node name="Label" type="Label" parent="Hud/end_game"]
 anchors_preset = -1
 anchor_left = 0.21006945
 anchor_right = 0.2734375
@@ -81,14 +81,14 @@ offset_bottom = 461.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_272bh")
 theme_override_font_sizes/font_size = 41
-text = "Congrats you won!!
+text = "
 
 Thank you for playing! 
 Contact abarrett3@ithaca.edu for more!"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="ColorRect" type="ColorRect" parent="Hud/winner"]
+[node name="ColorRect" type="ColorRect" parent="Hud/end_game"]
 z_index = -1
 offset_left = -15.0
 offset_top = -19.0
@@ -97,7 +97,19 @@ offset_bottom = 666.0
 mouse_filter = 2
 color = Color(0.8653553, 0.8375844, 1.5019991, 1)
 
+[node name="score_label" type="Label" parent="Hud/end_game"]
+offset_left = 138.0
+offset_top = 97.0
+offset_right = 1068.0
+offset_bottom = 276.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 56
+text = "Your Score is: "
+horizontal_alignment = 1
+vertical_alignment = 2
+
 [node name="guest_timer" type="Timer" parent="Hud"]
+wait_time = 0.5
 autostart = true
 
 [node name="Timer" type="Timer" parent="Hud"]
@@ -111,42 +123,6 @@ offset_bottom = 579.0
 theme_override_fonts/font = ExtResource("3_272bh")
 theme_override_font_sizes/font_size = 41
 text = "Time left: 120"
-
-[node name="loser" type="CanvasLayer" parent="Hud"]
-visible = false
-
-[node name="Label" type="Label" parent="Hud/loser"]
-offset_left = 118.0
-offset_top = 220.0
-offset_right = 1076.0
-offset_bottom = 363.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_272bh")
-theme_override_font_sizes/font_size = 51
-text = "Your event failed :("
-horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="ColorRect" type="ColorRect" parent="Hud/loser"]
-z_index = -1
-offset_left = -8.0
-offset_top = -8.0
-offset_right = 1211.0
-offset_bottom = 651.0
-mouse_filter = 2
-color = Color(0.8653553, 0.8375844, 1.5019991, 1)
-
-[node name="Label2" type="Label" parent="Hud/loser"]
-offset_left = 124.0
-offset_top = 328.0
-offset_right = 1082.0
-offset_bottom = 471.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_272bh")
-theme_override_font_sizes/font_size = 51
-text = "You needed __ more coins"
-horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="coin_count" type="Label" parent="Hud"]
 offset_left = -48.0

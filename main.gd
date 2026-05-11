@@ -2,7 +2,7 @@
 #to get guests up (space)
 extends Node
 
-var coins = 480
+var coins = 680
 var guests = 0
 var time_left = 120
 var cooldown_time = 7
@@ -13,7 +13,6 @@ var table_list = []
 
 func _ready() -> void:
 	$Hud.get_ready(coins)
-	new_table()
 	
 func _input(event):
 	if event.is_action_pressed("add_table"):
@@ -27,7 +26,7 @@ func new_guest():
 	guest.left_line.connect(on_guest_left_line)
 	unseated_guest_list.append(guest)
 	guest.update_color()
-	guest.name_guest(guests)
+	guest.name_guest()
 	
 	guests += 1
 	seat_guest_at_table()
@@ -92,14 +91,9 @@ func _on_timer_timeout() -> void:
 
 func game_over():
 	$Hud/background_music.end_music()
-	if coins >= 1500:
-		$Hud/winner.visible = true
-	else:
-		$Hud/loser.visible = true
-		$Hud/loser/Label2.text = "You needed " + str(1500-coins) + " more dollars"
+	$Hud/end_game/score_label.text = "Your score is: " + str(coins)
 	get_tree().paused = true
-	$Hud/playAgain.visible = true
-
+	$Hud/end_game.visible = true
 
 func _on_play_again_pressed() -> void:
 	get_tree().paused = false

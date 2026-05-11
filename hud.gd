@@ -33,7 +33,7 @@ func display_no_funds():
 		$no_funds.visible = false
 		
 func check_sufficient_funds(coins):
-	if coins < 300:
+	if coins < 500:
 		$coin_count.modulate = Color.MAROON
 		return false
 	else:
