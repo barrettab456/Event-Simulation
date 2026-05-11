@@ -22,7 +22,7 @@ func sit_guest(guest):
 
 			var target_pos = global_position + seat_loc_array[i]
 			guest.walk_to(target_pos)
-			guest.guest_leave_count = 25
+			guest.guest_leave_count = 15
 			guest.guest_leave_timer.start(1.00)
 			guest.satisfaction = 2
 			guest.update_color()

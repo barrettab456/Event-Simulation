@@ -44,7 +44,7 @@ focus_mode = 0
 theme_override_fonts/font = ExtResource("3_272bh")
 theme_override_font_sizes/font_size = 26
 text = "ADD TABLE
-$180 per table"
+$300 per table"
 
 [node name="table_cooldown" type="Timer" parent="Hud/add_table"]
 
@@ -63,7 +63,7 @@ theme_override_constants/line_spacing = -5
 theme_override_fonts/font = ExtResource("3_272bh")
 theme_override_font_sizes/font_size = 20
 text = "Gathering more tables...
- 13 MORE SECONDS!"
+ 5 MORE SECONDS!"
 horizontal_alignment = 1
 autowrap_mode = 3
 
@@ -136,6 +136,18 @@ offset_bottom = 651.0
 mouse_filter = 2
 color = Color(0.8653553, 0.8375844, 1.5019991, 1)
 
+[node name="Label2" type="Label" parent="Hud/loser"]
+offset_left = 124.0
+offset_top = 328.0
+offset_right = 1082.0
+offset_bottom = 471.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_272bh")
+theme_override_font_sizes/font_size = 51
+text = "You needed __ more coins"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
 [node name="coin_count" type="Label" parent="Hud"]
 offset_left = -48.0
 offset_top = 178.0
@@ -143,7 +155,7 @@ offset_right = 458.0
 offset_bottom = 265.0
 theme_override_fonts/font = ExtResource("3_272bh")
 theme_override_font_sizes/font_size = 50
-text = "Earnings: #"
+text = "Cash on Hand: #"
 
 [node name="no_funds" type="CanvasLayer" parent="Hud"]
 visible = false

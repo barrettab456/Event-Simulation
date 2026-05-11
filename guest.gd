@@ -5,9 +5,9 @@ signal left_line(guest)
 
 var satisfaction = 1
 var is_seated = false 
-var ticket_price = 40
+var ticket_price = 30
 var current_table = null
-var guest_leave_count = 20
+var guest_leave_count = 10
 var has_left = false
 
 @onready var guest_leave_timer = $guest_leave_timer
@@ -38,7 +38,7 @@ func _on_guest_leave_timer_timeout():
 		else:
 			left_line.emit(self)
 		queue_free()	
-	elif guest_leave_count < 10:
+	elif guest_leave_count < 5:
 		self.satisfaction = 0
 		update_color()
 	

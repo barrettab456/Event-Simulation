@@ -35,9 +35,9 @@ theme_override_constants/paragraph_spacing = -5
 theme_override_fonts/font = ExtResource("2_roe5y")
 theme_override_font_sizes/font_size = 26
 text = "Max capacity: 32
-Ticket Cost: $50
+Ticket Cost: $30
 Time: 6:00pm - 8:00pm
-Goal: Collect $1,000
+Goal: Collect $1,500
 "
 horizontal_alignment = 1
 

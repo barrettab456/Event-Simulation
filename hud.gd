@@ -1,11 +1,11 @@
 extends Node
 
 func get_ready(coins):
-	$coin_count.text = "Earnings:" + str(coins)
+	$coin_count.text = "Cash on Hand: " + str(coins)
 	$coin_count.modulate = Color.RED
 
 func update_coins_hud(coins):
-	$coin_count.text = "Earnings:" + str(coins)
+	$coin_count.text = "Cash on Hand: " + str(coins)
 
 func check_table_errors(table_list, coins):
 	if table_list.size() >= 8:
@@ -33,7 +33,7 @@ func display_no_funds():
 		$no_funds.visible = false
 		
 func check_sufficient_funds(coins):
-	if coins < 200:
+	if coins < 300:
 		$coin_count.modulate = Color.MAROON
 		return false
 	else:
